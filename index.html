@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATTUSO | Work Coffee & Specialty Roasters</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter, Oswald y Great Vibes / Alex Brush para replicar la caligrafía del menú -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos limpios -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gattusoDark: '#222222',
+                        gattusoLight: '#ffffff',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                        script: ['Alex Brush', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos base estrictos #222222 y #ffffff */
+        body {
+            background-color: #222222;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Textura sutil tipo pizarra del menú PDF */
+        .chalkboard-bg {
+            background-color: #222222;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        /* Animaciones suaves */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Personalización de scrollbar minimalista */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #222222;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffffff;
+            border-radius: 9999px;
+        }
+
+        /* Ocultar scrollbar en tabs horizontales */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#222222] text-[#ffffff] antialiased selection:bg-[#ffffff] selection:text-[#222222]">
+
+    <!-- ===================================================================== -->
+    <!-- 1. PANTALLA DE BIENVENIDA (GATEWAY / ENTRY SCREEN)                    -->
+    <!-- ===================================================================== -->
+    <section id="entry-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-between p-6 sm:p-12 bg-[#222222] transition-all duration-700 overflow-hidden">
+        <!-- Imagen de fondo del local en blanco y negro (tu foto Fondo.webp + render exacto en B/N para vista previa) -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <canvas id="gattuso-photo-bg" class="w-full h-full object-cover grayscale contrast-125 brightness-90 scale-105"></canvas>
+            <img id="gattuso-local-img" src="Fondo.webp" 
+                 alt="Terraza y lámparas Cafe Gattuso" 
+                 class="hidden w-full h-full object-cover grayscale contrast-125 brightness-95 scale-105"
+                 onload="this.classList.remove('hidden'); document.getElementById('gattuso-photo-bg').classList.add('hidden');">
+            <div class="absolute inset-0 bg-[#222222]/95 backdrop-blur-[5px]"></div>
+        </div>
+
+        <!-- Marco decorativo fino inspirado en el PDF -->
+        <div class="pointer-events-none fixed inset-3 sm:inset-6 border border-[#ffffff]/25 rounded-2xl z-10"></div>
+
+        <!-- Superior: Tagline Work Coffee -->
+        <div class="z-10 text-center mt-4 sm:mt-6">
+            <span class="inline-block px-4 py-1.5 rounded-full border border-[#ffffff]/30 text-xs tracking-[0.25em] uppercase font-medium">
+                Specialty Coffee &bull; Work Space &bull; Roasters
+            </span>
+        </div>
+
+        <!-- Centro: Logo Gattuso fiel al estilo caligráfico y tipográfico del PDF -->
+        <div class="z-10 flex flex-col items-center text-center max-w-2xl mx-auto my-auto">
+            <!-- SVG Logo Oficial GATTUSO CAFETERÍA con isotipo del gato -->
+            <div class="mb-8 relative group px-4">
+                <svg class="w-full max-w-[360px] sm:max-w-[440px] h-auto mx-auto text-[#ffffff]" viewBox="0 0 540 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Círculo exterior del isotipo -->
+                    <circle cx="80" cy="80" r="68" stroke="#ffffff" stroke-width="5.5"/>
+                    <!-- Silueta de la cabeza y orejas del gato -->
+                    <path d="M40 50C40 43 44 41 49 45L61 55C67 52 73 51 80 51C87 51 93 52 99 55L111 45C116 41 120 43 120 50L117 78C121 86 121 97 115 106C107 118 94 123 80 123C66 123 53 118 45 106C39 97 39 86 43 78L40 50Z" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round"/>
+                    <!-- Ojos afilados del gato -->
+                    <path d="M51 77C59 77 68 82 72 90C64 92 54 88 51 77Z" fill="#ffffff"/>
+                    <path d="M109 77C101 77 92 82 88 90C96 92 106 88 109 77Z" fill="#ffffff"/>
+                    <!-- Nariz triangular -->
+                    <path d="M74 97H86L80 104L74 97Z" fill="#ffffff"/>
+                    <!-- Hocico / boca -->
+                    <path d="M80 104V109M66 108C70 113 76 113 80 109C84 113 90 113 94 108" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Tipografía principal GATTUSO CAFETERÍA -->
+                    <text x="172" y="75" fill="#ffffff" font-family="'Inter', sans-serif" font-weight="900" font-size="60" letter-spacing="3">GATTUSO</text>
+                    <text x="172" y="135" fill="#ffffff" font-family="'Inter', sans-serif" font-weight="900" font-size="52" letter-spacing="2">CAFETERÍA</text>
+                </svg>
+            </div>
+
+            <h1 class="text-xl sm:text-2xl font-light tracking-wide text-[#ffffff]/90 mb-2">
+                Más que una cafetería, tu punto de encuentro.
+            </h1>
+            <p class="text-sm text-[#ffffff]/60 max-w-md mx-auto mb-10">
+                Elige cómo quieres comenzar tu experiencia hoy. Explora nuestra carta o ingresa a nuestro espacio digital.
+            </p>
+
+            <!-- LOS 2 BOTONES SOLICITADOS: MENÚ Y SITIO WEB -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-md">
+                <button onclick="openMenuView()" class="w-full sm:w-1/2 py-4 px-8 rounded-xl border-2 border-[#ffffff] bg-transparent text-[#ffffff] hover:bg-[#ffffff] hover:text-[#222222] font-display text-lg tracking-[0.15em] uppercase transition-all duration-300 flex items-center justify-center gap-3 group cursor-pointer shadow-lg">
+                    <i class="fa-solid fa-book-open text-sm group-hover:scale-110 transition-transform"></i>
+                    <span>Menú</span>
+                </button>
+
+                <button onclick="openWebsiteView('inicio')" class="w-full sm:w-1/2 py-4 px-8 rounded-xl border-2 border-[#ffffff] bg-[#ffffff] text-[#222222] hover:bg-transparent hover:text-[#ffffff] font-display text-lg tracking-[0.15em] uppercase transition-all duration-300 flex items-center justify-center gap-3 group cursor-pointer shadow-lg">
+                    <span>Sitio Web</span>
+                    <i class="fa-solid fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Inferior: Horario rápido -->
+        <div class="z-10 text-center mb-2 text-xs text-[#ffffff]/50 tracking-widest uppercase">
+            Lunes a Sábado &bull; 08:30 AM – 21:00 PM
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 2. BARRA DE NAVEGACIÓN PRINCIPAL (PARA SITIO WEB Y MENÚ)              -->
+    <!-- ===================================================================== -->
+    <header id="main-navbar" class="hidden sticky top-0 z-40 bg-[#222222]/95 backdrop-blur-md border-b border-[#ffffff]/15 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo clickable para volver a pantalla inicial -->
+                <button onclick="backToGateway()" class="flex items-center gap-3 text-left group cursor-pointer focus:outline-none" title="Volver al inicio">
+                    <svg class="w-11 h-11 shrink-0 text-[#ffffff] group-hover:scale-105 transition-transform" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="80" cy="80" r="68" stroke="#ffffff" stroke-width="6"/>
+                        <path d="M40 50C40 43 44 41 49 45L61 55C67 52 73 51 80 51C87 51 93 52 99 55L111 45C116 41 120 43 120 50L117 78C121 86 121 97 115 106C107 118 94 123 80 123C66 123 53 118 45 106C39 97 39 86 43 78L40 50Z" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
+                        <path d="M51 77C59 77 68 82 72 90C64 92 54 88 51 77Z" fill="#ffffff"/>
+                        <path d="M109 77C101 77 92 82 88 90C96 92 106 88 109 77Z" fill="#ffffff"/>
+                        <path d="M74 97H86L80 104L74 97Z" fill="#ffffff"/>
+                        <path d="M80 104V109M66 108C70 113 76 113 80 109C84 113 90 113 94 108" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <div>
+                        <span class="font-sans font-black text-lg tracking-[0.12em] block leading-none">GATTUSO</span>
+                        <span class="text-[10px] font-bold tracking-[0.2em] text-[#ffffff]/80 uppercase block mt-0.5">CAFETERÍA</span>
+                    </div>
+                </button>
+
+                <!-- Navegación Desktop -->
+                <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                    <button onclick="switchSection('inicio')" data-nav="inicio" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium tracking-wider uppercase transition-all cursor-pointer">
+                        Inicio
+                    </button>
+                    <button onclick="switchSection('tienda')" data-nav="tienda" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium tracking-wider uppercase transition-all cursor-pointer">
+                        Café en Grano
+                    </button>
+                    <button onclick="switchSection('nosotros')" data-nav="nosotros" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium tracking-wider uppercase transition-all cursor-pointer">
+                        Nosotros
+                    </button>
+                    <button onclick="switchSection('contacto')" data-nav="contacto" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium tracking-wider uppercase transition-all cursor-pointer">
+                        Contacto
+                    </button>
+                    <div class="h-5 w-[1px] bg-[#ffffff]/20 mx-2"></div>
+                    <button onclick="openMenuView()" data-nav="menu" class="nav-btn px-4 py-2 rounded-lg border border-[#ffffff] text-sm font-medium tracking-wider uppercase hover:bg-[#ffffff] hover:text-[#222222] transition-all cursor-pointer">
+                        <i class="fa-solid fa-mug-hot mr-1.5"></i> Carta / Menú
+                    </button>
+                </nav>
+
+                <!-- Acciones Derecha: Carrito + Menú Móvil -->
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleCart()" class="relative p-3 rounded-xl border border-[#ffffff]/30 hover:border-[#ffffff] hover:bg-[#ffffff] hover:text-[#222222] transition-all cursor-pointer" aria-label="Carrito de compras">
+                        <i class="fa-solid fa-bag-shopping text-base"></i>
+                        <span id="cart-badge" class="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-[#ffffff] text-[#222222] text-xs font-bold flex items-center justify-center border border-[#222222]">
+                            0
+                        </span>
+                    </button>
+
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-3 rounded-xl border border-[#ffffff]/30 hover:border-[#ffffff] transition-all cursor-pointer" aria-label="Abrir menú">
+                        <i id="mobile-menu-icon" class="fa-solid fa-bars text-base"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navegación Móvil Desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-[#ffffff]/15 bg-[#222222] px-4 pt-3 pb-6 space-y-2">
+            <button onclick="switchSection('inicio'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium uppercase tracking-wider hover:bg-[#ffffff]/10">Inicio (Work Coffee)</button>
+            <button onclick="switchSection('tienda'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium uppercase tracking-wider hover:bg-[#ffffff]/10">Tienda de Café (250g / 500g / 1kg)</button>
+            <button onclick="switchSection('nosotros'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium uppercase tracking-wider hover:bg-[#ffffff]/10">Nosotros</button>
+            <button onclick="switchSection('contacto'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium uppercase tracking-wider hover:bg-[#ffffff]/10">Contacto</button>
+            <button onclick="openMenuView(); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-bold uppercase tracking-wider bg-[#ffffff] text-[#222222] mt-2">Ver Carta Completa</button>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- 3. CONTENIDO PRINCIPAL DEL SITIO WEB                                  -->
+    <!-- ===================================================================== -->
+    <main id="website-container" class="hidden min-h-screen">
+
+        <!-- ----------------------------------------------------------------- -->
+        <!-- SECCIÓN: INICIO (WORK COFFEE & PUNTO DE ENCUENTRO)                -->
+        <!-- ----------------------------------------------------------------- -->
+        <section id="section-inicio" class="page-section fade-in">
+            <!-- Hero Principal Invertido / Alto Contraste -->
+            <div class="relative border-b border-[#ffffff]/15 chalkboard-bg">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6">
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#ffffff]/30 text-xs uppercase tracking-[0.2em]">
+                                <span class="w-2 h-2 rounded-full bg-[#ffffff] animate-pulse"></span>
+                                Work Coffee &amp; Social Hub
+                            </div>
+                            <h2 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold uppercase leading-[1.05] tracking-tight">
+                                No es solo café.<br>
+                                <span class="font-script font-normal text-5xl sm:text-7xl lg:text-8xl lowercase tracking-normal block mt-1">Es tu lugar de encuentro.</span>
+                            </h2>
+                            <p class="text-base sm:text-lg text-[#ffffff]/75 max-w-xl leading-relaxed font-light">
+                                En <strong>Gattuso</strong> diseñamos una atmósfera donde las ideas fluyen al ritmo de una extracción perfecta. Conecta tu laptop, reúne a tu equipo o disfruta de una pausa sin prisa con café de especialidad, brunch artesanal y coctelería After Coffee.
+                            </p>
+                            <div class="flex flex-wrap gap-4 pt-2">
+                                <button onclick="openReservationModal()" class="px-7 py-4 rounded-xl bg-[#ffffff] text-[#222222] font-display text-base uppercase tracking-widest hover:bg-[#222222] hover:text-[#ffffff] border-2 border-[#ffffff] transition-all cursor-pointer">
+                                    Reservar Mesa Work
+                                </button>
+                                <button onclick="switchSection('tienda')" class="px-7 py-4 rounded-xl bg-transparent text-[#ffffff] font-display text-base uppercase tracking-widest border-2 border-[#ffffff]/40 hover:border-[#ffffff] transition-all cursor-pointer">
+                                    Comprar Café en Grano
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta Visual Editorial Monocromática -->
+                        <div class="lg:col-span-5">
+                            <div class="relative rounded-2xl border border-[#ffffff]/25 p-3 bg-[#222222] shadow-2xl">
+                                <div class="relative rounded-xl overflow-hidden aspect-[4/5] bg-[#ffffff]/5">
+                                    <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=900&q=80" 
+                                         onerror="this.src='https://placehold.co/800x1000/222222/ffffff?text=GATTUSO+WORK+COFFEE'"
+                                         alt="Espacio de trabajo y café en Gattuso" 
+                                         class="w-full h-full object-cover grayscale contrast-125 hover:scale-105 transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-[#222222] via-transparent to-transparent opacity-90"></div>
+                                    <div class="absolute bottom-6 left-6 right-6 p-5 rounded-xl bg-[#222222]/90 border border-[#ffffff]/20 backdrop-blur-sm">
+                                        <p class="font-script text-3xl text-[#ffffff] mb-1">Work &amp; Sip</p>
+                                        <p class="text-xs text-[#ffffff]/80 uppercase tracking-widest">Fibra Óptica 900 Mbps &bull; Enchufes en cada mesa &bull; Métodos Filtrados</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pilares del Concepto Work Coffee (Bloque Blanco de Alto Contraste) -->
+            <div class="bg-[#ffffff] text-[#222222] py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-[0.25em] text-[#222222]/60 block mb-2">Experiencia Gattuso</span>
+                            <h3 class="font-display text-3xl sm:text-5xl font-bold uppercase tracking-tight">Diseñado para crear y compartir</h3>
+                        </div>
+                        <p class="text-sm sm:text-base text-[#222222]/75 max-w-md">
+                            Transformamos la pausa del café en un ecosistema productivo y social desde las 09:00 AM hasta el After Coffee.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Pilar 1 -->
+                        <div class="p-8 rounded-2xl border-2 border-[#222222] bg-[#ffffff] hover:bg-[#222222] hover:text-[#ffffff] transition-all duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-[#222222] text-[#ffffff] group-hover:bg-[#ffffff] group-hover:text-[#222222] flex items-center justify-center text-xl mb-6 transition-colors">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <h4 class="font-display text-2xl uppercase font-bold mb-3">Zona Work Friendly</h4>
+                            <p class="text-sm opacity-80 leading-relaxed">
+                                Mesas amplias, iluminación cálida, conectividad simétrica de alta velocidad y puntos de carga estratégicos para jornadas de enfoque total o reuniones creativas.
+                            </p>
+                        </div>
+
+                        <!-- Pilar 2 -->
+                        <div class="p-8 rounded-2xl border-2 border-[#222222] bg-[#ffffff] hover:bg-[#222222] hover:text-[#ffffff] transition-all duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-[#222222] text-[#ffffff] group-hover:bg-[#ffffff] group-hover:text-[#222222] flex items-center justify-center text-xl mb-6 transition-colors">
+                                <i class="fa-solid fa-filter"></i>
+                            </div>
+                            <h4 class="font-display text-2xl uppercase font-bold mb-3">Barra de Filtrados</h4>
+                            <p class="text-sm opacity-80 leading-relaxed">
+                                Extracciones al momento en V60, Sifón Japonés, Chemex, AeroPress, Origami y Moka Italiana. Seleccionamos granos de origen tostados para resaltar cada nota.
+                            </p>
+                        </div>
+
+                        <!-- Pilar 3 -->
+                        <div class="p-8 rounded-2xl border-2 border-[#222222] bg-[#ffffff] hover:bg-[#222222] hover:text-[#ffffff] transition-all duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-[#222222] text-[#ffffff] group-hover:bg-[#ffffff] group-hover:text-[#222222] flex items-center justify-center text-xl mb-6 transition-colors">
+                                <i class="fa-solid fa-martini-glass-citrus"></i>
+                            </div>
+                            <h4 class="font-display text-2xl uppercase font-bold mb-3">After Coffee &amp; Encuentro</h4>
+                            <p class="text-sm opacity-80 leading-relaxed">
+                                Cuando termina la jornada laboral, el espacio evoluciona: tablas ibéricas, pizzas artesanales, mocktails y coctelería de autor con café como el Espresso Martini.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner Destacado Tienda de Café en Casa -->
+            <div class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                <div class="rounded-3xl border border-[#ffffff]/25 p-8 sm:p-14 chalkboard-bg flex flex-col lg:flex-row items-center justify-between gap-10">
+                    <div class="space-y-4 max-w-xl">
+                        <span class="font-script text-4xl text-[#ffffff]">De nuestra barra a tu hogar</span>
+                        <h3 class="font-display text-3xl sm:text-5xl font-bold uppercase tracking-tight">Lleva el grano Gattuso contigo</h3>
+                        <p class="text-[#ffffff]/75 text-sm sm:text-base leading-relaxed">
+                            Disponemos de bolsas de café de especialidad recién tostado en formatos de <strong>250 g</strong>, <strong>500 g</strong> y <strong>1 kilo</strong>. Elige grano entero o el tipo de molienda exacto para tu cafetera.
+                        </p>
+                        <div class="pt-2">
+                            <button onclick="switchSection('tienda')" class="px-8 py-4 rounded-xl bg-[#ffffff] text-[#222222] font-display uppercase tracking-widest text-sm hover:bg-transparent hover:text-[#ffffff] border-2 border-[#ffffff] transition-all cursor-pointer">
+                                Ir a la Tienda de Café
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 sm:gap-5 w-full lg:w-auto">
+                        <div class="p-5 rounded-2xl border border-[#ffffff]/30 text-center bg-[#222222]">
+                            <span class="font-display text-2xl sm:text-3xl font-bold block">250g</span>
+                            <span class="text-[11px] uppercase tracking-widest text-[#ffffff]/60">Exploración</span>
+                        </div>
+                        <div class="p-5 rounded-2xl border-2 border-[#ffffff] text-center bg-[#ffffff] text-[#222222]">
+                            <span class="font-display text-2xl sm:text-3xl font-bold block">500g</span>
+                            <span class="text-[11px] uppercase tracking-widest font-semibold">Favorito</span>
+                        </div>
+                        <div class="p-5 rounded-2xl border border-[#ffffff]/30 text-center bg-[#222222]">
+                            <span class="font-display text-2xl sm:text-3xl font-bold block">1 KG</span>
+                            <span class="text-[11px] uppercase tracking-widest text-[#ffffff]/60">Oficina / Work</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------- -->
+        <!-- SECCIÓN: TIENDA DE CAFÉ (BOLSAS 250G, 500G, 1 KILO)               -->
+        <!-- ----------------------------------------------------------------- -->
+        <section id="section-tienda" class="hidden page-section fade-in py-16 sm:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Encabezado Tienda -->
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="font-script text-4xl sm:text-5xl block mb-1">Tostaduría Gattuso</span>
+                    <h2 class="font-display text-4xl sm:text-5xl font-bold uppercase tracking-tight mb-4">Café en Bolsas</h2>
+                    <p class="text-sm sm:text-base text-[#ffffff]/70">
+                        Selecciona tu origen favorito, el formato ideal (<strong>250 g, 500 g o 1 kilo</strong>) y la molienda fresca al momento del despacho.
+                    </p>
+                </div>
+
+                <!-- Grid de Productos de Café -->
+                <div id="coffee-store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Renderizado dinámico mediante JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------- -->
+        <!-- SECCIÓN: NOSOTROS                                                 -->
+        <!-- ----------------------------------------------------------------- -->
+        <section id="section-nosotros" class="hidden page-section fade-in">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20">
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="text-xs uppercase tracking-[0.25em] text-[#ffffff]/60 block">Nuestra Historia &amp; Filosofía</span>
+                        <h2 class="font-display text-4xl sm:text-6xl font-bold uppercase leading-none">
+                            El carácter de un buen espresso.<br>
+                            <span class="font-script font-normal text-5xl sm:text-6xl lowercase">La calidez de casa.</span>
+                        </h2>
+                        <p class="text-[#ffffff]/80 leading-relaxed font-light">
+                            <strong>Gattuso</strong> nació con una convicción clara: romper la barrera entre la cafetería de especialidad tradicional y los espacios modernos donde las personas trabajan, conversan y crean comunidad.
+                        </p>
+                        <p class="text-[#ffffff]/80 leading-relaxed font-light">
+                            Desde nuestros tamaños con personalidad propia —<strong>Michi</strong> (chico), <strong>Gattuso</strong> (mediano) y <strong>Moto-Moto</strong> (grande)— hasta nuestra barra de 6 métodos de extracción manual, cada detalle está pensado para sorprender tanto al purista del café filtrado como a quien busca un lugar cómodo para pasar la tarde.
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 pt-4 border-t border-[#ffffff]/15">
+                            <div>
+                                <span class="font-display text-3xl font-bold block">6</span>
+                                <span class="text-xs text-[#ffffff]/60 uppercase tracking-wider">Métodos Filtrados</span>
+                            </div>
+                            <div>
+                                <span class="font-display text-3xl font-bold block">100%</span>
+                                <span class="text-xs text-[#ffffff]/60 uppercase tracking-wider">Grano Arábica</span>
+                            </div>
+                            <div>
+                                <span class="font-display text-3xl font-bold block">+50</span>
+                                <span class="text-xs text-[#ffffff]/60 uppercase tracking-wider">Puestos Work</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6">
+                        <div class="rounded-2xl border border-[#ffffff]/25 p-3 bg-[#222222]">
+                            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80" 
+                                 onerror="this.src='https://placehold.co/900x700/222222/ffffff?text=COMUNIDAD+GATTUSO'"
+                                 alt="Baristas y comunidad en Gattuso" 
+                                 class="w-full h-[420px] object-cover rounded-xl grayscale contrast-125">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de los 6 Métodos del PDF -->
+                <div class="rounded-3xl bg-[#ffffff] text-[#222222] p-8 sm:p-14">
+                    <div class="text-center max-w-2xl mx-auto mb-12">
+                        <span class="font-script text-4xl block">Arte de Extracción</span>
+                        <h3 class="font-display text-3xl sm:text-4xl font-bold uppercase tracking-tight">Nuestros Métodos de Café Filtrado</h3>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="p-6 rounded-2xl border border-[#222222]/20">
+                            <h4 class="font-display text-xl font-bold uppercase mb-2">01. V60</h4>
+                            <p class="text-sm text-[#222222]/80">Extracción por goteo Drip en parábola con ángulo de 60°, resaltando notas limpias y aromáticas.</p>
+                        </div>
+                        <div class="p-6 rounded-2xl border border-[#222222]/20">
+                            <h4 class="font-display text-xl font-bold uppercase mb-2">02. Sifón</h4>
+                            <p class="text-sm text-[#222222]/80">Método de vacío con dos recipientes y presión de vapor que produce una taza limpia y llena de matices.</p>
+                        </div>
+                        <div class="p-6 rounded-2xl border border-[#222222]/20">
+                            <h4 class="font-display text-xl font-bold uppercase mb-2">03. Chemex</h4>
+                            <p class="text-sm text-[#222222]/80">Inventada en los años 40, logra una bebida ligera y cristalina donde brilla la acidez natural del grano.</p>
+                        </div>
+                        <div class="p-6 rounded-2xl border border-[#222222]/20">
+                            <h4 class="font-display text-xl font-bold uppercase mb-2">04. AeroPress</h4>
+                            <p class="text-sm text-[#222222]/80">Inmersión con control total de tiempo y presión para una extracción versátil, dulce y sedosa.</p>
+                        </div>
+                        <div class="p-6 rounded-2xl border border-[#222222]/20">
+                            <h4 class="font-display text-xl font-bold uppercase mb-2">05. Origami</h4>
+                            <p class="text-sm text-[#222222]/80">Inspirado en el arte japonés, sus 20 canales en zig-zag permiten un flujo constante y dulce.</p>
+                        </div>
+                        <div class="p-6 rounded-2xl border border-[#222222]/20">
+                            <h4 class="font-display text-xl font-bold uppercase mb-2">06. Moka Italiana</h4>
+                            <p class="text-sm text-[#222222]/80">El clásico ícono creado en 1933 por Alfonso Bialetti para un café intenso, con cuerpo y carácter.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------- -->
+        <!-- SECCIÓN: CONTACTO                                                 -->
+        <!-- ----------------------------------------------------------------- -->
+        <section id="section-contacto" class="hidden page-section fade-in py-16 sm:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <!-- Info de Ubicación y Horarios -->
+                    <div class="lg:col-span-5 space-y-8">
+                        <div>
+                            <span class="font-script text-4xl block mb-1">Visítanos</span>
+                            <h2 class="font-display text-4xl sm:text-5xl font-bold uppercase tracking-tight">Contacto &amp; Encuentro</h2>
+                            <p class="text-[#ffffff]/70 text-sm mt-3 leading-relaxed">
+                                ¿Buscas reservar una mesa para trabajar en equipo, organizar una reunión privada o consultar por pedidos mayoristas de café en grano? Escríbenos.
+                            </p>
+                        </div>
+
+                        <div class="space-y-5">
+                            <div class="flex items-start gap-4 p-5 rounded-2xl border border-[#ffffff]/15 bg-[#ffffff]/[0.02]">
+                                <div class="w-10 h-10 rounded-xl bg-[#ffffff] text-[#222222] flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display uppercase tracking-wider text-sm font-bold">Dirección</h4>
+                                    <p class="text-sm text-[#ffffff]/75 mt-1">Av. Providencia 2145, Local 4 &bull; Santiago, Chile</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-5 rounded-2xl border border-[#ffffff]/15 bg-[#ffffff]/[0.02]">
+                                <div class="w-10 h-10 rounded-xl bg-[#ffffff] text-[#222222] flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display uppercase tracking-wider text-sm font-bold">Horarios</h4>
+                                    <p class="text-sm text-[#ffffff]/75 mt-1">Lunes a Viernes: 08:30 – 21:30 hrs</p>
+                                    <p class="text-sm text-[#ffffff]/75">Sábados: 09:00 – 22:00 hrs (Brunch hasta 13:30 hrs)</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-5 rounded-2xl border border-[#ffffff]/15 bg-[#ffffff]/[0.02]">
+                                <div class="w-10 h-10 rounded-xl bg-[#ffffff] text-[#222222] flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display uppercase tracking-wider text-sm font-bold">Contacto Directo</h4>
+                                    <p class="text-sm text-[#ffffff]/75 mt-1">hola@gattusocoffee.cl &bull; +56 9 8765 4321</p>
+                                    <p class="text-xs text-[#ffffff]/50 mt-1">@gattuso.workcoffee</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulario de Contacto -->
+                    <div class="lg:col-span-7">
+                        <div class="rounded-3xl bg-[#ffffff] text-[#222222] p-8 sm:p-10 shadow-2xl">
+                            <h3 class="font-display text-2xl sm:text-3xl font-bold uppercase mb-2">Envíanos un mensaje</h3>
+                            <p class="text-sm text-[#222222]/70 mb-8">Te responderemos a la brevedad para coordinar tu visita o pedido.</p>
+
+                            <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-5">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase tracking-wider mb-2">Nombre completo</label>
+                                        <input type="text" required placeholder="Ej. Camila Rojas" class="w-full px-4 py-3.5 rounded-xl border-2 border-[#222222]/20 focus:border-[#222222] focus:outline-none text-sm bg-[#ffffff]">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold uppercase tracking-wider mb-2">Correo electrónico</label>
+                                        <input type="email" required placeholder="camila@ejemplo.cl" class="w-full px-4 py-3.5 rounded-xl border-2 border-[#222222]/20 focus:border-[#222222] focus:outline-none text-sm bg-[#ffffff]">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider mb-2">Motivo de contacto</label>
+                                    <select class="w-full px-4 py-3.5 rounded-xl border-2 border-[#222222]/20 focus:border-[#222222] focus:outline-none text-sm bg-[#ffffff]">
+                                        <option>Reserva Espacio Work Coffee / Reunión</option>
+                                        <option>Pedido de Café en Grano (250g / 500g / 1kg)</option>
+                                        <option>Eventos / After Coffee Privado</option>
+                                        <option>Consulta General</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider mb-2">Mensaje</label>
+                                    <textarea rows="4" required placeholder="Cuéntanos qué necesitas..." class="w-full px-4 py-3.5 rounded-xl border-2 border-[#222222]/20 focus:border-[#222222] focus:outline-none text-sm bg-[#ffffff]"></textarea>
+                                </div>
+
+                                <button type="submit" class="w-full py-4 rounded-xl bg-[#222222] text-[#ffffff] font-display uppercase tracking-widest text-base hover:bg-[#ffffff] hover:text-[#222222] border-2 border-[#222222] transition-all cursor-pointer">
+                                    Enviar Mensaje
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------- -->
+        <!-- SECCIÓN: CARTA / MENÚ DIGITAL COMPLETO (EXTRAÍDO DEL PDF)         -->
+        <!-- ----------------------------------------------------------------- -->
+        <section id="section-menu" class="hidden page-section fade-in py-12 sm:py-16 chalkboard-bg">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Cabecera del Menú -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 border-b border-[#ffffff]/20">
+                    <div>
+                        <span class="font-script text-4xl sm:text-5xl block">Nuestra Carta</span>
+                        <h2 class="font-display text-3xl sm:text-5xl font-bold uppercase tracking-tight">Menú Gattuso</h2>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="switchSection('inicio')" class="px-5 py-2.5 rounded-xl border border-[#ffffff]/40 hover:border-[#ffffff] text-xs uppercase tracking-widest transition-all cursor-pointer">
+                            Ir al Sitio Web
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Buscador y Filtros de Categoría -->
+                <div class="my-8 space-y-4">
+                    <div class="relative max-w-md">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-[#ffffff]/50 text-sm"></i>
+                        <input type="text" id="menu-search" oninput="filterMenu()" placeholder="Buscar café, brunch, sandwich, cocktail..." class="w-full pl-11 pr-4 py-3 rounded-xl bg-[#ffffff]/5 border border-[#ffffff]/20 focus:border-[#ffffff] focus:outline-none text-sm text-[#ffffff] placeholder-[#ffffff]/40">
+                    </div>
+
+                    <!-- Tabs de Categorías del PDF -->
+                    <div id="menu-tabs" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
+                        <!-- Generados dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Leyenda de Tamaños Característicos del PDF -->
+                <div class="mb-8 p-4 rounded-2xl border border-[#ffffff]/20 bg-[#ffffff]/[0.03] flex flex-wrap items-center justify-between gap-4">
+                    <span class="text-xs uppercase tracking-widest text-[#ffffff]/70 font-semibold">Tamaños de Bebidas:</span>
+                    <div class="flex flex-wrap items-center gap-4 sm:gap-8 text-xs">
+                        <span class="flex items-center gap-2"><strong class="px-2 py-0.5 rounded bg-[#ffffff] text-[#222222] font-display">MICHI</strong> Chico</span>
+                        <span class="flex items-center gap-2"><strong class="px-2 py-0.5 rounded bg-[#ffffff] text-[#222222] font-display">GATTUSO</strong> Mediano</span>
+                        <span class="flex items-center gap-2"><strong class="px-2 py-0.5 rounded bg-[#ffffff] text-[#222222] font-display">MOTO-MOTO</strong> Grande</span>
+                    </div>
+                </div>
+
+                <!-- Contenedor de Items del Menú -->
+                <div id="menu-items-container" class="space-y-12">
+                    <!-- Renderizado dinámico con todos los ítems del PDF -->
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-[#ffffff]/15 bg-[#222222] py-12 mt-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <svg class="w-9 h-9 shrink-0 text-[#ffffff]" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="80" cy="80" r="68" stroke="#ffffff" stroke-width="6"/>
+                        <path d="M40 50C40 43 44 41 49 45L61 55C67 52 73 51 80 51C87 51 93 52 99 55L111 45C116 41 120 43 120 50L117 78C121 86 121 97 115 106C107 118 94 123 80 123C66 123 53 118 45 106C39 97 39 86 43 78L40 50Z" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
+                        <path d="M51 77C59 77 68 82 72 90C64 92 54 88 51 77Z" fill="#ffffff"/>
+                        <path d="M109 77C101 77 92 82 88 90C96 92 106 88 109 77Z" fill="#ffffff"/>
+                        <path d="M74 97H86L80 104L74 97Z" fill="#ffffff"/>
+                        <path d="M80 104V109M66 108C70 113 76 113 80 109C84 113 90 113 94 108" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <div>
+                        <span class="font-sans font-black text-base tracking-wider uppercase block leading-none">GATTUSO CAFETERÍA</span>
+                        <span class="text-[10px] text-[#ffffff]/50 uppercase tracking-widest">Work Coffee &amp; Specialty Roasters</span>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider mb-1">Preferencia de Zona</label>
+                    <select class="w-full px-4 py-3 rounded-xl border-2 border-[#222222]/20 focus:border-[#222222] focus:outline-none text-sm">
+                        <option>Zona Enfoque (Con enchufes + Luz natural)</option>
+                        <option>Mesa Colaborativa Central</option>
+                        <option>Barra de Filtrados</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-4 rounded-xl bg-[#222222] text-[#ffffff] font-display uppercase tracking-widest text-sm hover:bg-[#ffffff] hover:text-[#222222] border-2 border-[#222222] transition-all cursor-pointer mt-2">
+                    Confirmar Reserva
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- 6. NOTIFICACIÓN TOAST PERSONALIZADA (SIN ALERT())                     -->
+    <!-- ===================================================================== -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- ===================================================================== -->
+    <!-- LÓGICA JAVASCRIPT COMPLETA                                            -->
+    <!-- ===================================================================== -->
+    <script>
+        // ---------------------------------------------------------------------
+        // BASE DE DATOS DEL MENÚ EXTRAÍDA FIELMENTE DEL PDF DE GATTUSO
+        // ---------------------------------------------------------------------
+        const MENU_DATA = [
+            {
+                id: 'cafe',
+                title: 'Café',
+                type: 'sized', // Michi / Gattuso / Moto-Moto
+                items: [
+                    { name: 'Latte', prices: ['$4.000', '$4.800', '$5.500'] },
+                    { name: 'Latte Vainilla', prices: ['$4.300', '$5.100', '$5.700'] },
+                    { name: 'Dirty Chai Latte', prices: ['$4.290', '$4.790', '$5.290'] },
+                    { name: 'Americano', prices: ['$3.500', '$4.300', '$5.000'] },
+                    { name: 'Moka / Moka Blanco', prices: ['$4.500', '$5.200', '$5.900'] },
+                    { name: 'Capuccino', prices: ['$4.000', '$4.800', '$5.500'] },
+                    { name: 'Capuccino Vainilla', prices: ['$4.300', '$5.100', '$5.700'] },
+                    { name: 'Caramel Latte', prices: ['$4.500', '$5.200', '$5.900'] },
+                    { name: 'Chocolate Caliente', prices: ['$4.000', '$4.700', '$5.200'] },
+                    { name: 'Chocolate Caliente c/ Menta', prices: ['$4.590', '$4.990', '$5.490'] },
+                    { name: 'Espresso', prices: ['$2.500', '$2.800', '—'] },
+                    { name: 'Ristretto', prices: ['$2.500', '$2.800', '—'] },
+                    { name: 'Lungo', prices: ['$2.500', '$2.800', '—'] },
+                    { name: 'Cortado', prices: ['$4.000', '$4.800', '—'] },
+                    { name: 'Flat White', prices: ['$3.800', '—', '—'] },
+                    { name: 'Filtrado (V60, Sifón, Chemex, AeroPress, Origami, Moka)', prices: ['$3.500', '—', '—'] }
+                ]
+            },
+            {
+                id: 'te-matcha',
+                title: 'Té & Matcha',
+                subtitle: 'Tés en hebras e infusiones botánicas, y Matcha japonés batido tradicionalmente.',
+                type: 'mixed',
+                items: [
+                    { name: 'Té Negro en Hebras', price: '$2.800', desc: 'Preparado a la temperatura justa para resaltar sus notas naturales.' },
+                    { name: 'Té Chai', price: '$2.800', desc: 'Infusión especiada aromática.' },
+                    { name: 'Matcha Latte Caliente', sizes: 'Michi $4.200 | Gattuso $5.000 | Moto-Moto $5.700' },
+                    { name: 'Matcha Iced', sizes: 'Michi $4.200 | Gattuso $5.000 | Moto-Moto $5.700' },
+                    { name: 'Matcha Sabores (Frutilla, Mango, Kiwi, Arándano)', sizes: 'Michi $4.500 | Gattuso $5.200 | Moto-Moto $5.900' }
+                ]
+            },
+            {
+                id: 'iced-frapuccino',
+                title: 'Iced & Frapuccino',
+                type: 'sized',
+                items: [
+                    { name: 'Iced After Eight', prices: ['$4.590', '$4.990', '$5.490'] },
+                    { name: 'Iced Latte', prices: ['$4.000', '$4.800', '$5.500'] },
+                    { name: 'Iced Latte Vainilla', prices: ['$4.300', '$5.100', '$5.700'] },
+                    { name: 'Iced Latte Frambuesa', prices: ['$4.290', '$4.790', '$5.290'] },
+                    { name: 'Iced Dirty Chai Latte', prices: ['$4.290', '$4.790', '$5.290'] },
+                    { name: 'Iced Americano', prices: ['$3.500', '$4.300', '$5.000'] },
+                    { name: 'Iced Moka / Moka Blanco', prices: ['$4.500', '$5.200', '$5.900'] },
+                    { name: 'Iced Caramel Latte', prices: ['$4.500', '$5.200', '$5.900'] },
+                    { name: 'Cold Brew', prices: ['$3.500', '$4.300', '$5.000'] },
+                    { name: 'Frapuccino After Eight', prices: ['$4.590', '$4.990', '$5.490'] },
+                    { name: 'Frapuccino Snickers', prices: ['$4.590', '$4.990', '$5.490'] },
+                    { name: 'Frapuccino Caramelo', prices: ['$4.200', '$4.900', '$5.400'] },
+                    { name: 'Frapuccino Moka / Moka Blanco', prices: ['$4.200', '$4.900', '$5.400'] },
+                    { name: 'Frapuccino Matcha', prices: ['$4.200', '$4.900', '$5.400'] },
+                    { name: 'Frapuccino Sabores (Frutilla, Mango, Kiwi, Arándano)', prices: ['$4.200', '$4.900', '$5.400'] },
+                    { name: 'Frapuccino Matcha Sabores', prices: ['$4.500', '$5.200', '$5.900'] }
+                ]
+            },
+            {
+                id: 'milkshakes-jugos',
+                title: 'Milkshakes & Jugos',
+                subtitle: 'Milkshakes preparados con auténtico helado, crema chantilly y salsas. Jugos y limonadas naturales.',
+                type: 'sized',
+                items: [
+                    { name: 'Milkshake After Eight', prices: ['$4.590', '$4.990', '$5.490'] },
+                    { name: 'Milkshake Banana', prices: ['$4.000', '$4.500', '$4.900'] },
+                    { name: 'Milkshake Banana Maní', prices: ['$4.590', '$4.990', '$5.590'] },
+                    { name: 'Milkshake Banana + Sabores', prices: ['$4.590', '$4.990', '$5.590'] },
+                    { name: 'Milkshake Limón / Menta / Piña Colada', prices: ['$4.000', '$4.500', '$4.900'] },
+                    { name: 'Milkshake Sabores (Frutilla, Arándano, Mango, Kiwi, Maracuyá, Piña, Frambuesa)', prices: ['$4.000', '$4.500', '$4.900'] },
+                    { name: 'Jugo / Limonada Natural (Frutilla, Kiwi, Arándano, Limón, Mango, Maracuyá, Piña, Naranja, Frambuesa)', prices: ['$3.500', '$3.900', '$4.200'] }
+                ]
+            },
+            {
+                id: 'desayuno-brunch',
+                title: 'Desayuno & Brunch',
+                subtitle: 'Incluye Té de la casa, Long Black, Latte o Filtrado Michi. Horario Brunch: 9:00 AM a 13:30 PM.',
+                type: 'dish',
+                items: [
+                    { name: 'Paila Solitaria', price: '$5.990', desc: 'Solo huevo con panera a la mantequilla.' },
+                    { name: 'Paila de Campo', price: '$6.990', desc: 'Queso Jamón o Queso Salame con panera a la mantequilla.' },
+                    { name: 'Paila Croccante', price: '$6.990', desc: 'Huevo y Tocino con panera a la mantequilla.' },
+                    { name: 'Omelette Napolitano', price: '$7.990', desc: 'Queso, Tomate, Jamón y Orégano con panera a la mantequilla.' },
+                    { name: 'Omelette del Campo', price: '$7.990', desc: 'Queso Jamón o Queso Salame con panera a la mantequilla.' },
+                    { name: 'Omelette Criollo', price: '$7.990', desc: 'Queso Tocino Crocante o Queso Champiñón con panera a la mantequilla.' },
+                    { name: 'Toast alla Francese', price: '$7.990', desc: 'Queso, Jamón / Queso, Salame.' },
+                    { name: 'Toast alla Francese Dolce', price: '$7.990', desc: '4 triángulos acompañados de Frutos Rojos, Miel, Fruto Seco y Azúcar Flor.' },
+                    { name: 'Brunch Un Express (Para servir o llevar)', price: '$7.990', desc: 'Pan croissant queso/jamón o salame y un jugo de naranja natural Michi.' },
+                    { name: 'Brunch Un Singolo (1 Persona) / Buona Giornata (2 Personas)', price: '$12.990 / $24.990', desc: 'Tostadas francesas de pan Brioche, Queso, Jamón, palta, huevo, mermelada, panera masa madre y jugo a elección.' },
+                    { name: 'Brunch Una Delizia (1 Persona) / Amorevole (2 Personas)', price: '$12.990 / $24.990', desc: 'Croissant, tostadas a la mantequilla de pan Brioche, palta, mermelada del día, pastel del día y jugo a elección.' }
+                ]
+            },
+            {
+                id: 'sandwiches-ensaladas',
+                title: 'Sandwiches & Saludable',
+                subtitle: 'Todos los sandwiches se pueden cambiar de pan a elección: Focaccia, Ciabatta o Brioche.',
+                type: 'dish',
+                items: [
+                    { name: 'Sandwich Gattuso', price: '$5.290', desc: 'Pan Focaccia con queso Philadelphia, Jamón serrano, Rúcula, Tomate y Orégano.' },
+                    { name: 'Sandwich Gattuso Mediterráneo', price: '$5.290', desc: 'Pan Focaccia en aceite de oliva, Orégano, Tomate, Aceituna, Queso Cabra y Rúcula.' },
+                    { name: 'Clásico Croissant', price: '$3.790', desc: 'Croissant Jamón-Queso o Salame-Queso.' },
+                    { name: 'Palta & Oro', price: '$5.550', desc: 'Pan Croissant, Palta y Huevo.' },
+                    { name: 'Ciabatta Clásica', price: '$4.990', desc: 'Pan Ciabatta con queso Philadelphia, Orégano, Lechuga, Queso, Jamón o Salame.' },
+                    { name: 'Imperial', price: '$5.790', desc: 'Pan Brioche de masa madre a la mantequilla, orégano, Huevo pochado, Palta y Jamón serrano.' },
+                    { name: 'Mechada Gattuso', price: '$6.290', desc: 'Pan Focaccia con queso Philadelphia, Mechada, Rúcula, Tomate y Orégano.' },
+                    { name: 'Quechada', price: '$5.990', desc: 'Pan Ciabatta, Mechada y Queso derretido.' },
+                    { name: 'Italiana', price: '$6.290', desc: 'Pan Ciabatta, Tomate, Palta, Mayo, Mechada o Pollo.' },
+                    { name: 'Estrellada', price: '$5.990', desc: 'Pan Brioche en aceite de oliva, Palta, Tocino Crocante y Huevo estrellado.' },
+                    { name: 'Supremo', price: '$6.290', desc: 'Pan Ciabatta, Pollo, Tocino Crocante, Queso y Lechuga.' },
+                    { name: 'Deku', price: '$5.790', desc: 'Pan Ciabatta en aceite de oliva, orégano, Queso, Lechuga, Palta y Pollo.' },
+                    { name: 'Emperador', price: '$5.590', desc: 'Pan Brioche en aceite de oliva, Pollo y Palta.' },
+                    { name: 'Jamonísimo Verde', price: '$4.750', desc: 'Pan Croissant, Jamón planchado de cerdo y Palta.' },
+                    { name: 'Ensalada Gattuso', price: '$5.990', desc: 'Jamón Serrano, Lechuga, Aceituna, Tomate, palta con Dressing de la Casa.' },
+                    { name: 'Ensalada Silvestre', price: '$5.590', desc: 'Palmito, Atún, Aceituna, Tomate, Palta con Dressing de la Casa.' },
+                    { name: 'Ensalada de Pollo', price: '$6.290', desc: 'Lechuga, Palta, Crutones al horno, Pollo, Rallado de Grana Padano con Dressing de la Casa.' },
+                    { name: 'Ensalada Mediterránea', price: '$6.490', desc: 'Pollo, Palta, Tomate, Queso Cabra, Frutos Secos, Mix de Hojas y Tortilla grillada.' },
+                    { name: 'Wrap Velluto', price: '$6.290', desc: 'Lechuga, Palta, Tomate, Queso Ranco, Pollo o Mechada con Dressing de la Casa.' },
+                    { name: 'Wrap Gattuso', price: '$5.990', desc: 'Rúcula con aceite de oliva, Palta, Queso crema, Jamón Serrano, Tomate con Dressing.' }
+                ]
+            },
+            {
+                id: 'postres-compartir',
+                title: 'Postres & Para Compartir',
+                subtitle: 'Copas de helado con salsa a elección (Chocolate, Frambuesa, Caramelo, Manjar) y tablas After Coffee.',
+                type: 'dish',
+                items: [
+                    { name: 'Copa de Helado (2 Sabores)', price: '$4.000', desc: 'Con salsa a elección y crema chantilly.' },
+                    { name: 'Copa de Helado (3 Sabores)', price: '$5.000', desc: 'Con salsa a elección y crema chantilly.' },
+                    { name: 'Affogato Gattuso', price: '$4.590', desc: 'Helado de Vainilla con doble espresso, bordes de maní y Manjar.' },
+                    { name: 'Café Helado', price: '$4.990', desc: 'Helado de Vainilla, leche a elección, un espresso y crema chantilly.' },
+                    { name: 'Quesadilla Tradicional (After Coffee)', price: '$9.990', desc: 'Jamón Queso y Queso Tocino acompañado de Salsa Guacamole y Sour Cream.' },
+                    { name: 'Quesadilla Mestiza (After Coffee)', price: '$12.990', desc: 'Queso Pollo y Queso Mechada acompañado de Salsa Guacamole y Sour Cream.' },
+                    { name: 'Tabla Ibérica (After Coffee)', price: '$12.990', desc: 'Queso de cabra, Jamón serrano, Grana Padano, Aceitunas, Tortillas, Guacamole y frutos secos.' },
+                    { name: 'Pizza Napolitana', price: '$13.500', desc: 'Salsa Pomodoro, Mozzarella, Jamón, Aceituna y orégano.' },
+                    { name: 'Pizza Gattuso', price: '$15.500', desc: 'Salsa Pomodoro, Mozzarella, Rúcula, Jamón Serrano, Queso Grana Padano y Aceite de Oliva.' },
+                    { name: 'Pizza Dos Carnes', price: '$17.500', desc: 'Salsa Pomodoro, Mozzarella, Pollo, Mechada y Pimentones saltados.' }
+                ]
+            },
+            {
+                id: 'cocktails-bebidas',
+                title: 'Mocktails, Cocktails & Bebidas',
+                type: 'dish',
+                items: [
+                    { name: 'Mocktail Espresso Naranja / Espresso Tonic', price: '$3.500 / $3.900 / $4.200', desc: 'Tamaños Michi, Gattuso y Moto-Moto (Sin alcohol).' },
+                    { name: 'Mocktail Piña Colada / Mojito', price: '$4.900', desc: 'Refrescante versión sin alcohol.' },
+                    { name: 'Espresso Martini', price: '$5.990', desc: 'El clásico cocktail con doble carga de espresso recién extraído.' },
+                    { name: 'Bubba Deus (Trago de autor)', price: '$5.990', desc: 'Creación exclusiva de la barra Gattuso.' },
+                    { name: 'Mojito Tradicional / Mojito Sabores', price: '$6.590 / $6.990', desc: 'Sabores: Kiwi, Arándano, Mango, Frutilla, Maracuyá.' },
+                    { name: 'Coladas (Piña, Maracuyá o Mango)', price: '$7.490', desc: 'Cremosas y tropicales.' },
+                    { name: 'Ramazzotti', price: '$6.900', desc: 'Fresco y cítrico.' },
+                    { name: 'Moscow Mule / Mexican Mule (Tequila)', price: '$7.900', desc: 'Servido bien frío con ginger beer.' },
+                    { name: 'Tropical Gin / Tropical Gin Coffee', price: '$7.800', desc: 'Maracuyá o Mango, y versión infusionada con café.' },
+                    { name: 'Irish Coffee / Whisky Sour', price: '$7.500 / $7.900', desc: 'Clásicos de coctelería.' },
+                    { name: 'Margarita / Tequila Sunrise / Ruso Negro', price: '$5.900 / $5.500', desc: 'Coctelería tradicional.' },
+                    { name: 'Bebidas 350cc (Coca-Cola, Fanta, Sprite - Normal/Zero)', price: '$1.300', desc: 'Lata fría.' },
+                    { name: 'Energéticas (Monster / Red Bull)', price: '$2.190 / $2.090', desc: 'Variedades tradicionales y sin azúcar.' },
+                    { name: 'Agua Mineral (Con gas / Sin gas)', price: '$1.200', desc: 'Botella individual.' }
+                ]
+            }
+        ];
+
+        // ---------------------------------------------------------------------
+        // BASE DE DATOS DE TIENDA DE CAFÉ (BOLSAS DE 250G, 500G Y 1 KILO)
+        // ---------------------------------------------------------------------
+        const COFFEE_PRODUCTS = [
+            {
+                id: 'gattuso-house-blend',
+                name: 'Gattuso House Blend',
+                origin: 'Brasil & Colombia &bull; Tueste Medio',
+                notes: 'Chocolate amargo, avellana tostada y caramelo suave. Ideal para espresso y preparaciones con leche.',
+                image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=700&q=80',
+                prices: {
+                    '250g': 9500,
+                    '500g': 17500,
+                    '1kg': 32000
+                }
+            },
+            {
+                id: 'origen-etiopia-filtrado',
+                name: 'Etiopía Yirgacheffe',
+                origin: 'Etiopía &bull; Tueste Medio-Claro',
+                notes: 'Floral, jazmín, bergamota y acidez cítrica brillante. Diseñado especialmente para V60, Chemex y Origami.',
+                image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=700&q=80',
+                prices: {
+                    '250g': 11500,
+                    '500g': 21000,
+                    '1kg': 38500
+                }
+            },
+            {
+                id: 'work-focus-peru',
+                name: 'Perú Cajamarca Orgánico',
+                origin: 'Perú &bull; Tueste Medio',
+                notes: 'Panela dulce, almendra y cacao limpio. Balance perfecto para acompañarte durante toda tu jornada Work Coffee.',
+                image: 'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&w=700&q=80',
+                prices: {
+                    '250g': 10200,
+                    '500g': 18900,
+                    '1kg': 34500
+                }
+            }
+        ];
+
+        // Estado global de la aplicación
+        let activeCategory = 'all';
+        let cart = [];
+        let selectedWeights = {
+            'gattuso-house-blend': '500g',
+            'origen-etiopia-filtrado': '250g',
+            'work-focus-peru': '1kg'
+        };
+
+        // ---------------------------------------------------------------------
+        // NAVEGACIÓN ENTRE GATEWAY, MENÚ Y SITIO WEB
+        // ---------------------------------------------------------------------
+        function openMenuView() {
+            hideGateway();
+            switchSection('menu');
+        }
+
+        function openWebsiteView(initialSection = 'inicio') {
+            hideGateway();
+            switchSection(initialSection);
+        }
+
+        function hideGateway() {
+            const gateway = document.getElementById('entry-screen');
+            gateway.style.opacity = '0';
+            gateway.style.pointerEvents = 'none';
+            setTimeout(() => {
+                gateway.classList.add('hidden');
+            }, 400);
+
+            document.getElementById('main-navbar').classList.remove('hidden');
+            document.getElementById('website-container').classList.remove('hidden');
+        }
+
+        function backToGateway() {
+            const gateway = document.getElementById('entry-screen');
+            gateway.classList.remove('hidden');
+            setTimeout(() => {
+                gateway.style.opacity = '1';
+                gateway.style.pointerEvents = 'auto';
+            }, 10);
+            document.getElementById('main-navbar').classList.add('hidden');
+            document.getElementById('website-container').classList.add('hidden');
+        }
+
+        function switchSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.page-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+
+            // Mostrar la seleccionada
+            const target = document.getElementById(`section-${sectionId}`);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Actualizar estilos de botones activos en el navbar
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                const navTarget = btn.getAttribute('data-nav');
+                if (navTarget === sectionId) {
+                    if (navTarget === 'menu') {
+                        btn.classList.add('bg-[#ffffff]', 'text-[#222222]');
+                    } else {
+                        btn.classList.add('bg-[#ffffff]', 'text-[#222222]');
+                    }
+                } else {
+                    btn.classList.remove('bg-[#ffffff]', 'text-[#222222]');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.replace('fa-xmark', 'fa-bars');
+            } else {
+                icon.classList.replace('fa-bars', 'fa-xmark');
+            }
+        }
+
+        // ---------------------------------------------------------------------
+        // RENDERIZADO Y FILTRADO DEL MENÚ COMPLETO (PDF)
+        // ---------------------------------------------------------------------
+        function initMenu() {
+            const tabsContainer = document.getElementById('menu-tabs');
+            let tabsHTML = `
+                <button onclick="setMenuCategory('all')" data-cat="all" class="menu-tab-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#ffffff] text-[#222222] transition-all shrink-0 cursor-pointer">
+                    Todo el Menú
+                </button>
+            `;
+            MENU_DATA.forEach(cat => {
+                tabsHTML += `
+                    <button onclick="setMenuCategory('${cat.id}')" data-cat="${cat.id}" class="menu-tab-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider border border-[#ffffff]/25 text-[#ffffff] hover:border-[#ffffff] transition-all shrink-0 cursor-pointer">
+                        ${cat.title}
+                    </button>
+                `;
+            });
+            tabsContainer.innerHTML = tabsHTML;
+            renderMenuItems();
+        }
+
+        function setMenuCategory(catId) {
+            activeCategory = catId;
+            document.querySelectorAll('.menu-tab-btn').forEach(btn => {
+                if (btn.getAttribute('data-cat') === catId) {
+                    btn.classList.add('bg-[#ffffff]', 'text-[#222222]');
+                    btn.classList.remove('border', 'border-[#ffffff]/25', 'text-[#ffffff]');
+                } else {
+                    btn.classList.remove('bg-[#ffffff]', 'text-[#222222]');
+                    btn.classList.add('border', 'border-[#ffffff]/25', 'text-[#ffffff]');
+                }
+            });
+            renderMenuItems();
+        }
+
+        function filterMenu() {
+            renderMenuItems();
+        }
+
+        function renderMenuItems() {
+            const container = document.getElementById('menu-items-container');
+            const query = (document.getElementById('menu-search').value || '').toLowerCase().trim();
+            let html = '';
+
+            MENU_DATA.forEach(category => {
+                if (activeCategory !== 'all' && category.id !== activeCategory) return;
+
+                const filteredItems = category.items.filter(item => {
+                    const inName = item.name.toLowerCase().includes(query);
+                    const inDesc = item.desc ? item.desc.toLowerCase().includes(query) : false;
+                    return inName || inDesc;
+                });
+
+                if (filteredItems.length === 0) return;
+
+                html += `
+                    <div class="rounded-3xl border border-[#ffffff]/20 p-6 sm:p-8 bg-[#222222]/90">
+                        <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-[#ffffff]/15 pb-4 mb-6 gap-2">
+                            <div>
+                                <h3 class="font-script text-4xl sm:text-5xl text-[#ffffff]">${category.title}</h3>
+                                ${category.subtitle ? `<p class="text-xs text-[#ffffff]/65 mt-1">${category.subtitle}</p>` : ''}
+                            </div>
+                            ${category.type === 'sized' ? `
+                                <div class="hidden sm:grid grid-cols-3 gap-4 text-center w-64 text-[11px] font-display tracking-wider uppercase text-[#ffffff]/70">
+                                    <span>Michi</span>
+                                    <span>Gattuso</span>
+                                    <span>Moto-Moto</span>
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <div class="divide-y divide-[#ffffff]/10">
+                            ${filteredItems.map(item => {
+                                if (category.type === 'sized') {
+                                    return `
+                                        <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-[#ffffff]/[0.03] px-2 rounded-lg transition-colors">
+                                            <span class="font-medium text-sm sm:text-base tracking-wide">${item.name}</span>
+                                            <div class="grid grid-cols-3 gap-2 sm:gap-4 text-left sm:text-center sm:w-64 text-xs sm:text-sm font-mono">
+                                                <span class="bg-[#ffffff]/10 sm:bg-transparent px-2 py-1 rounded"><span class="sm:hidden text-[10px] text-[#ffffff]/50 block">Michi</span>${item.prices[0]}</span>
+                                                <span class="bg-[#ffffff]/10 sm:bg-transparent px-2 py-1 rounded"><span class="sm:hidden text-[10px] text-[#ffffff]/50 block">Gattuso</span>${item.prices[1]}</span>
+                                                <span class="bg-[#ffffff]/10 sm:bg-transparent px-2 py-1 rounded"><span class="sm:hidden text-[10px] text-[#ffffff]/50 block">Moto-Moto</span>${item.prices[2]}</span>
+                                            </div>
+                                        </div>
+                                    `;
+                                } else {
+                                    return `
+                                        <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-[#ffffff]/[0.03] px-2 rounded-lg transition-colors">
+                                            <div class="max-w-2xl">
+                                                <h4 class="font-semibold text-sm sm:text-base tracking-wide uppercase">${item.name}</h4>
+                                                ${item.desc ? `<p class="text-xs sm:text-sm text-[#ffffff]/65 font-light mt-0.5">${item.desc}</p>` : ''}
+                                                ${item.sizes ? `<p class="text-xs text-[#ffffff]/80 font-mono mt-1">${item.sizes}</p>` : ''}
+                                            </div>
+                                            ${item.price ? `<span class="font-display text-lg font-bold tracking-wider shrink-0">${item.price}</span>` : ''}
+                                        </div>
+                                    `;
+                                }
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (!html) {
+                html = `
+                    <div class="text-center py-16 border border-[#ffffff]/15 rounded-3xl">
+                        <p class="text-lg font-light text-[#ffffff]/70">No encontramos resultados para "${query}".</p>
+                        <button onclick="document.getElementById('menu-search').value=''; filterMenu();" class="mt-4 px-5 py-2 rounded-xl border border-[#ffffff] text-xs uppercase tracking-widest cursor-pointer">Limpiar búsqueda</button>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ---------------------------------------------------------------------
+        // TIENDA DE CAFÉ EN BOLSAS (250G, 500G, 1 KILO) Y CARRITO
+        // ---------------------------------------------------------------------
+        function formatCLP(amount) {
+            return '$' + amount.toLocaleString('es-CL');
+        }
+
+        function renderCoffeeStore() {
+            const grid = document.getElementById('coffee-store-grid');
+            grid.innerHTML = COFFEE_PRODUCTS.map(prod => {
+                const currentWeight = selectedWeights[prod.id];
+                const currentPrice = prod.prices[currentWeight];
+
+                return `
+                    <div class="rounded-3xl border border-[#ffffff]/25 bg-[#222222] overflow-hidden flex flex-col justify-between shadow-xl hover:border-[#ffffff] transition-all">
+                        <div>
+                            <!-- Imagen en escala de grises de alto contraste -->
+                            <div class="relative h-64 bg-[#ffffff]/5 overflow-hidden">
+                                <img src="${prod.image}" 
+                                     onerror="this.src='https://placehold.co/700x500/222222/ffffff?text=GATTUSO+COFFEE+BAG'"
+                                     alt="${prod.name}" 
+                                     class="w-full h-full object-cover grayscale contrast-125 hover:scale-105 transition-transform duration-500">
+                                <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#222222]/90 border border-[#ffffff]/30 text-[10px] uppercase tracking-widest">
+                                    Tueste Fresco
+                                </div>
+                            </div>
+
+                            <div class="p-6 sm:p-7 space-y-4">
+                                <div>
+                                    <span class="text-xs text-[#ffffff]/60 uppercase tracking-widest">${prod.origin}</span>
+                                    <h3 class="font-display text-2xl font-bold uppercase mt-1">${prod.name}</h3>
+                                </div>
+                                <p class="text-xs sm:text-sm text-[#ffffff]/75 font-light leading-relaxed">
+                                    ${prod.notes}
+                                </p>
+
+                                <!-- Selector de Gramaje: 250g, 500g, 1 Kilo -->
+                                <div>
+                                    <label class="block text-[11px] uppercase tracking-widest text-[#ffffff]/60 mb-2">Formato de Bolsa:</label>
+                                    <div class="grid grid-cols-3 gap-2">
+                                        ${['250g', '500g', '1kg'].map(w => `
+                                            <button type="button" onclick="selectBagWeight('${prod.id}', '${w}')" 
+                                                class="py-2.5 rounded-xl text-xs font-display font-bold uppercase tracking-wider border transition-all cursor-pointer ${currentWeight === w ? 'bg-[#ffffff] text-[#222222] border-[#ffffff]' : 'bg-transparent text-[#ffffff] border-[#ffffff]/30 hover:border-[#ffffff]'}">
+                                                ${w === '1kg' ? '1 Kilo' : w}
+                                            </button>
+                                        `).join('')}
+                                    </div>
+                                </div>
+
+                                <!-- Selector de Molienda -->
+                                <div>
+                                    <label class="block text-[11px] uppercase tracking-widest text-[#ffffff]/60 mb-2">Tipo de Molienda:</label>
+                                    <select id="grind-${prod.id}" class="w-full px-3.5 py-2.5 rounded-xl bg-[#222222] border border-[#ffffff]/30 text-xs text-[#ffffff] focus:border-[#ffffff] focus:outline-none">
+                                        <option value="Grano Entero">Grano Entero</option>
+                                        <option value="Molido Espresso">Molido Espresso</option>
+                                        <option value="Molido Filtrado (V60 / Chemex)">Molido Filtrado (V60 / Chemex)</option>
+                                        <option value="Molido Moka / Prensa">Molido Moka / Prensa Francesa</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 sm:p-7 pt-0 flex items-center justify-between gap-4">
+                            <div>
+                                <span class="text-[10px] uppercase tracking-widest text-[#ffffff]/50 block">Precio</span>
+                                <span class="font-display text-2xl font-bold">${formatCLP(currentPrice)}</span>
+                            </div>
+                            <button onclick="addToCart('${prod.id}')" class="px-6 py-3.5 rounded-xl bg-[#ffffff] text-[#222222] font-display text-xs uppercase tracking-widest font-bold hover:bg-transparent hover:text-[#ffffff] border-2 border-[#ffffff] transition-all cursor-pointer flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectBagWeight(prodId, weight) {
+            selectedWeights[prodId] = weight;
+            renderCoffeeStore();
+        }
+
+        function addToCart(prodId) {
+            const product = COFFEE_PRODUCTS.find(p => p.id === prodId);
+            const weight = selectedWeights[prodId];
+            const grind = document.getElementById(`grind-${prodId}`).value;
+            const price = product.prices[weight];
+
+            const existingIndex = cart.findIndex(item => item.id === prodId && item.weight === weight && item.grind === grind);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({
+                    id: prodId,
+                    name: product.name,
+                    weight: weight === '1kg' ? '1 Kilo' : weight,
+                    grind,
+                    price,
+                    qty: 1
+                });
+            }
+
+            updateCartUI();
+            showToast(`Agregado: ${product.name} (${weight === '1kg' ? '1 Kilo' : weight})`);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const list = document.getElementById('cart-items-list');
+            const totalEl = document.getElementById('cart-total');
+
+            const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+            const totalAmount = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+            badge.textContent = totalQty;
+            totalEl.textContent = formatCLP(totalAmount);
+
+            if (cart.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-12 text-[#222222]/50">
+                        <i class="fa-solid fa-bag-shopping text-3xl mb-3"></i>
+                        <p class="text-sm">Tu bolsa está vacía.</p>
+                        <p class="text-xs mt-1">Explora nuestras bolsas de 250g, 500g y 1 kilo.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = cart.map((item, idx) => `
+                <div class="p-4 rounded-2xl border border-[#222222]/15 flex items-center justify-between gap-3">
+                    <div>
+                        <h4 class="font-display font-bold uppercase text-sm">${item.name}</h4>
+                        <p class="text-xs text-[#222222]/70">${item.weight} &bull; ${item.grind}</p>
+                        <p class="text-xs font-bold mt-1">${item.qty} x ${formatCLP(item.price)}</p>
+                    </div>
+                    <button onclick="removeFromCart(${idx})" class="w-8 h-8 rounded-lg border border-[#222222]/20 hover:bg-[#222222] hover:text-[#ffffff] flex items-center justify-center text-xs transition-colors cursor-pointer" title="Eliminar">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function checkoutOrder() {
+            if (cart.length === 0) {
+                showToast('Agrega al menos una bolsa de café para continuar.');
+                return;
+            }
+            cart = [];
+            updateCartUI();
+            toggleCart();
+            showToast('¡Pedido recibido! Prepararemos tu café recién tostado en Gattuso.');
+        }
+
+        // ---------------------------------------------------------------------
+        // MODALES, FORMULARIOS Y NOTIFICACIONES
+        // ---------------------------------------------------------------------
+        function openReservationModal() {
+            document.getElementById('reservation-modal').classList.remove('hidden');
+        }
+
+        function closeReservationModal() {
+            document.getElementById('reservation-modal').classList.add('hidden');
+        }
+
+        function handleReservationSubmit(e) {
+            e.preventDefault();
+            closeReservationModal();
+            showToast('¡Mesa Work Coffee reservada con éxito! Te esperamos en Gattuso.');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast('Mensaje enviado. Nuestro equipo te contactará pronto.');
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'px-5 py-3.5 rounded-xl bg-[#ffffff] text-[#222222] border-2 border-[#222222] shadow-2xl text-xs font-semibold tracking-wide flex items-center gap-3 fade-in';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-sm"></i><span>${message}</span>`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Inicialización al cargar
+        window.addEventListener('DOMContentLoaded', () => {
+            renderExactLocalPhotoBW();
+            initMenu();
+            renderCoffeeStore();
+            updateCartUI();
+        });
+
+        // Genera la escena exacta de tu foto (pérgola, lámparas tejidas y toldos CAFE GATTUSO) en blanco y negro
+        function renderExactLocalPhotoBW() {
+            const canvas = document.getElementById('gattuso-photo-bg');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = 1600;
+            const h = canvas.height = 1000;
+
+            // 1. Fondo edificio exterior en tonos grises claros/medios
+            const skyGrad = ctx.createLinearGradient(0, 0, 0, h);
+            skyGrad.addColorStop(0, '#c8c8c8');
+            skyGrad.addColorStop(0.55, '#9e9e9e');
+            skyGrad.addColorStop(1, '#6e6e6e');
+            ctx.fillStyle = skyGrad;
+            ctx.fillRect(0, 0, w, h);
+
+            // Ventanales de fondo
+            ctx.fillStyle = '#858585';
+            ctx.fillRect(0, 120, w, 450);
+            ctx.strokeStyle = '#3a3a3a';
+            ctx.lineWidth = 6;
+            for (let x = 80; x < w; x += 220) {
+                ctx.strokeRect(x, 120, 220, 450);
+            }
+
+            // 2. Toldos inferiores con logo CAFE GATTUSO (izquierda y derecha)
+            function drawAwning(cx, cy, awWidth) {
+                ctx.save();
+                ctx.fillStyle = '#333333';
+                ctx.beginPath();
+                ctx.moveTo(cx - awWidth * 0.42, cy - 85);
+                ctx.lineTo(cx + awWidth * 0.42, cy - 85);
+                ctx.lineTo(cx + awWidth * 0.52, cy);
+                ctx.lineTo(cx - awWidth * 0.52, cy);
+                ctx.closePath();
+                ctx.fill();
+
+                // Faldón frontal del toldo
+                ctx.fillStyle = '#282828';
+                ctx.fillRect(cx - awWidth * 0.52, cy, awWidth * 1.04, 54);
+
+                // Isotipo gato blanco en el toldo
+                const lx = cx - awWidth * 0.34;
+                const ly = cy + 27;
+                ctx.strokeStyle = '#efefef';
+                ctx.lineWidth = 2.5;
+                ctx.beginPath();
+                ctx.arc(lx, ly, 17, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // Orejas y cara del gato
+                ctx.beginPath();
+                ctx.moveTo(lx - 9, ly - 8);
+                ctx.lineTo(lx - 6, ly - 13);
+                ctx.lineTo(lx - 2, ly - 9);
+                ctx.lineTo(lx + 2, ly - 9);
+                ctx.lineTo(lx + 6, ly - 13);
+                ctx.lineTo(lx + 9, ly - 8);
+                ctx.stroke();
+
+                // Texto CAFE GATTUSO
+                ctx.fillStyle = '#f2f2f2';
+                ctx.font = '800 25px Inter, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText('CAFE GATTUSO', lx + 26, ly + 9);
+                ctx.restore();
+            }
+
+            drawAwning(330, 745, 580);
+            drawAwning(1160, 725, 620);
+
+            // 3. Estructura de madera oscura y pérgola superior en perspectiva
+            ctx.fillStyle = '#252525';
+            ctx.fillRect(0, 560, w, 58); // Viga horizontal central
+
+            // Vigas diagonales de la pérgola
+            ctx.save();
+            ctx.strokeStyle = '#242424';
+            ctx.lineWidth = 26;
+            for (let i = -300; i < w + 300; i += 170) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i + 260, 560);
+                ctx.stroke();
+            }
+            ctx.lineWidth = 18;
+            for (let y = 70; y < 560; y += 135) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(w, y + 65);
+                ctx.stroke();
+            }
+            ctx.restore();
+
+            // 4. Follaje colgante en esquinas superiores (blanco y negro)
+            function drawFoliage(startX, endX, maxDrop) {
+                for (let x = startX; x < endX; x += 22) {
+                    const drop = 60 + Math.sin(x * 0.03) * 45 + (Math.cos(x * 0.07) * 35) + maxDrop;
+                    for (let y = 0; y < drop; y += 18) {
+                        ctx.fillStyle = (x + y) % 3 === 0 ? '#4d4d4d' : ((x + y) % 2 === 0 ? '#686868' : '#2f2f2f');
+                        ctx.beginPath();
+                        ctx.ellipse(x, y, 16, 8, (x % 5) * 0.4, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            }
+            drawFoliage(0, 740, 110);
+            drawFoliage(1080, 1600, 90);
+
+            // 5. Tres lámparas colgantes de mimbre tejido (posiciones exactas de la foto)
+            function drawWovenLamp(cx, topY, lampW, lampH) {
+                // Cable colgante
+                ctx.strokeStyle = '#1b1b1b';
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(cx, 0);
+                ctx.lineTo(cx, topY);
+                ctx.stroke();
+
+                // Resplandor interior de ampolleta cálida en B/N
+                const glow = ctx.createRadialGradient(cx, topY + lampH * 0.58, 8, cx, topY + lampH * 0.58, lampW * 0.55);
+                glow.addColorStop(0, '#ffffff');
+                glow.addColorStop(0.45, '#d4d4d4');
+                glow.addColorStop(1, 'rgba(90,90,90,0)');
+                ctx.fillStyle = glow;
+                ctx.beginPath();
+                ctx.ellipse(cx, topY + lampH * 0.5, lampW * 0.46, lampH * 0.48, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Trama tejida de mimbre de la lámpara
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(cx - lampW * 0.16, topY);
+                ctx.quadraticCurveTo(cx - lampW * 0.52, topY + lampH * 0.45, cx - lampW * 0.46, topY + lampH);
+                ctx.lineTo(cx + lampW * 0.46, topY + lampH);
+                ctx.quadraticCurveTo(cx + lampW * 0.52, topY + lampH * 0.45, cx + lampW * 0.16, topY);
+                ctx.closePath();
+                ctx.clip();
+
+                // Fibras verticales y horizontales entrelazadas
+                ctx.strokeStyle = '#4a4a4a';
+                ctx.lineWidth = 4;
+                for (let x = cx - lampW * 0.5; x <= cx + lampW * 0.5; x += 11) {
+                    ctx.beginPath();
+                    ctx.moveTo(cx + (x - cx) * 0.35, topY);
+                    ctx.quadraticCurveTo(x, topY + lampH * 0.5, x, topY + lampH);
+                    ctx.stroke();
+                }
+                ctx.strokeStyle = '#6b6b6b';
+                ctx.lineWidth = 3;
+                for (let y = topY + 10; y < topY + lampH; y += 13) {
+                    ctx.beginPath();
+                    ctx.moveTo(cx - lampW * 0.5, y);
+                    ctx.lineTo(cx + lampW * 0.5, y);
+                    ctx.stroke();
+                }
+                ctx.restore();
+
+                // Borde exterior de la pantalla
+                ctx.strokeStyle = '#3b3b3b';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(cx - lampW * 0.16, topY);
+                ctx.quadraticCurveTo(cx - lampW * 0.52, topY + lampH * 0.45, cx - lampW * 0.46, topY + lampH);
+                ctx.lineTo(cx + lampW * 0.46, topY + lampH);
+                ctx.quadraticCurveTo(cx + lampW * 0.52, topY + lampH * 0.45, cx + lampW * 0.16, topY);
+                ctx.stroke();
+            }
+
+            // Lámpara grande derecha primer plano
+            drawWovenLamp(1315, 65, 290, 390);
+            // Lámpara mediana izquierda
+            drawWovenLamp(470, 520, 175, 235);
+            // Lámpara mediana derecha fondo
+            drawWovenLamp(1415, 515, 165, 225);
+
+            // 6. Marcos blancos de puertas corredizas inferiores
+            ctx.strokeStyle = '#e5e5e5';
+            ctx.lineWidth = 14;
+            ctx.strokeRect(20, 625, 675, 365);
+            ctx.strokeRect(720, 625, 860, 365);
+        }
+    </script>
+</body>
+</html>
